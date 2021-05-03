@@ -1,0 +1,623 @@
+name :--shaikh md faizan md zainulhaque  output:--
+mb no:-7775962642
+email:-faizyshaikh204@gmail.com
+..........................................................,,,,,,,,,...................
+**Sequences Practice Problems
+
+1)1. Use Random Function (( RANDOM )) to get Single Digit
+
+#! /bin/bash
+val=$((RANDOM%(9-1)+1))
+echo $val
+
+output:--
+7
+
+2)Use Random to get Dice Number between 1 to 6
+
+#! /bin/bash
+val=$((RANDOM%(7-1)+1))
+echo $val
+
+output:--
+5
+
+3)Add two Random Dice Number and Print the Result
+
+#! /bin/bash
+val1=$((RANDOM%(7-1)+1))
+val2=$((RANDOM%(7-1)+1))
+val=$(( val1+val2 ))
+echo "dies one " $val1
+echo "dies two "$val2
+echo $val
+
+output:--
+dies one  1
+dies two 5
+6
+
+
+4)Write a program that reads 5 Random 2 Digit values , then find their
+
+#! /bin/bash
+val1=$((RANDOM%(99-10)+10))
+val2=$((RANDOM%(99-10)+10))
+val3=$((RANDOM%(99-10)+10))
+val4=$((RANDOM%(99-10)+10))
+val5=$((RANDOM%(99-10)+10))
+sum=$(( val1+val2+val3+val+val5 ))
+avg=sum/5
+echo "sum is " $sum
+echo "average is " $avg
+
+output:--
+sum is  283
+average is  sum/5
+
+
+5)Unit Conversion
+
+a)1ft = 12 in then 42 in = ? ft  [feet.sh]
+
+#! /bin/bash
+onefeet=12
+inputinchvalue=42
+outputfeet=$(( inputinchvalue/onefeet ))
+echo $outputfeet
+
+output:--
+3
+
+b)Rectangular Plot of 60 feet x 40 feet in meters
+
+#! /bin/bash
+onefeet=3
+inputfeetvalue1=60
+inputfeetvalue2=40
+outputmeter1=$(( inputfeetvalue1/onefeet ))
+outputmeter2=$(( inputfeetvalue2/onefeet ))
+echo "60 feet x 40 feet"
+echo $outputmeter1"meters" "x" $outputmeter2"meters"
+
+output:--
+60 feet x 40 feet
+20meters x 13meters
+
+c)Calculate area of 25 such plots in acres
+
+#! /bin/bash
+oneacreinsquarefeet=43560
+lengthininch=60
+widthininch=40
+oneplotinsquarefeet=$(( lengthininch*widthininch ))
+all25plotsizeinsquarefeet=$(( oneplotinsquarefeet*25 ))
+all25plotssizeinacres=$((all25plotsizeinsquarefeet/oneacreinsquarefeet))
+ echo "Area of 25 such plots in acres will be = " $all25plotssizeinacres
+
+output:--
+Area of 25 such plots in acres will be =  1
+
+.............................................................................................
+
+**Selection Practice Problems with if & else
+
+6)Write a program that reads 5 Random 3 Digit values and then outputs the minimum
+and the maximum value
+sol:-
+
+#! /bin/bash
+val1=$((RANDOM%(999-100)+100))
+val2=$((RANDOM%(999-100)+100))
+val3=$((RANDOM%(999-100)+100))
+val4=$((RANDOM%(999-100)+100))
+val5=$((RANDOM%(999-100)+100))
+small=$val1
+echo "numbr is"
+echo $val1
+echo $val2
+echo $val3
+echo $val4
+echo $val5
+if [ $val1 -gt $val2 ]
+then
+small=$val2
+fi
+if [ $val3 -lt $val4 -a $small -gt $val3 ]
+then
+small=$val3
+fi
+if [ $small -gt $val4 ]
+then
+small=$val4
+fi
+if [ $small -gt $val5 ]
+then
+small=$val5
+fi
+echo "minimum value" $small
+        
+large=$val1
+if [ $val1 -lt $val2 ]
+then
+large=$val2
+fi
+if [ $val3 -gt $val4 -a $small -lt $val3 ]
+then
+large=$val3
+fi
+if [ $large -lt $val4 ]
+then
+large=$val4
+fi
+if [ $large -lt $val5 ]
+then
+large=$val5
+fi
+echo "maximum value" $large
+
+output:--
+
+numbr is
+770
+829
+323
+423
+809
+minimum value 323
+maximum value 829
+
+7)Write a program that takes day and month from the command line and prints true if
+day of month is between March 20 and June 20, false otherwise.
+
+sol:--
+  
+#! /bin/bash
+read -p "enter a month " month
+read -p "enter a day " day
+if [ $month -lt 3 -o $month -gt 6 ]
+then
+echo "false1"
+fi
+if [ $month -eq 3 -a $day -lt 20 ]
+then
+echo "false2"
+fi
+if [ $month -eq 3 -a $day -ge 20 ]
+then
+echo "true"
+fi
+if [ $month -eq 6 -a $day -gt 20 ]
+then
+echo "false3"
+fi
+if [ $month -eq 6 -a $day -le 20 ]
+then
+echo "true"
+fi
+output:--
+     enter a month 3
+     enter a day 19
+     false2
+
+     enter a month 3
+     enter a day 20 
+     true
+
+method...2)
+    
+ #! /bin/bash
+read -p "enter a month " month
+read -p "enter a day " day
+if [ $month -lt 3 -o $month -gt 6 ]
+then
+echo "false1"
+elif [ $month -eq 3 -a $day -lt 20 ]
+then
+echo "false2"
+elif [ $month -eq 6 -a $day -gt 20 ]
+then
+echo "false3"
+else
+echo "true"
+fi
+
+
+
+8)Write a program that takes a year as input and outputs the Year is a Leap Year or not
+a Leap Year. A Leap Year checks for 4 Digit Number, Divisible by 4 and not 100 unless
+divisible by 400.(leap.sh)
+
+
+sol:--
+
+#! /bin/bash
+read -p "Enter a year [YYYY] " year
+if [ $((year%4)) -eq 0 -a $((year%100)) -ne 0 -o $((year%400)) -eq 0 ]
+then
+echo "leap year"
+else
+echo "not leap year"
+fi
+
+output :--
+  Enter a year [YYYY] 2016
+  leap year
+
+ Enter a year [YYYY] 2018
+ not leap year
+
+
+9)Write a program to simulate a coin flip and print out "Heads" or "Tails" accordingly.
+
+soln:-
+ #! /bin/bash
+if [ $((RANDOM%2)) -eq 0 ]
+then
+echo "Head"
+else
+echo "Tail"
+fi
+
+output:-- ./head.sh 
+	  Head
+
+          ./head.sh
+	  Tail
+
+.......................................................................................
+Selection Practice Problems with if, elif and else
+
+9)Read a single digit number and write the number in word
+
+soln:--
+  
+#! /bin/bash
+read -p "Enter a number" num1
+if [ $num1 -eq 0 ]
+then
+echo $num1 "=zero"
+
+elif [ $num1 -eq 2 ]
+then
+echo $num1 "=two"
+
+elif [ $num1 -eq 2 ]
+then
+echo $num1 "=two"
+
+elif [ $num1 -eq 3 ]
+then
+echo $num1 "=three"
+
+elif [ $num1 -eq 4 ]
+then
+echo $num1 "=four"
+
+elif [ $num1 -eq 5 ]
+then
+echo $num1 "=five"
+
+elif [ $num1 -eq 6 ]
+then
+echo $num1 "=six"
+
+elif [ $num1 -eq 7 ]
+then
+echo $num1 "=seven"
+
+elif [ $num1 -eq 8 ]
+then
+echo $num1 "=eight"
+
+elif [ $num1 -eq 9 ]
+then
+echo $num1 "=nine"
+
+elif [ $num1 -gt 9 ]
+then
+echo "invalid number(type single digit number)"
+fi
+
+
+output:--
+Enter a number9
+9 =nine
+
+Enter a number8
+8 =eight
+
+Enter a number12
+invalid number(type single digit number)
+
+
+10)Read a Number and Display the week day (Sunday, Monday,...)
+sol:-
+
+#! /bin/bash
+echo write digit between 1 to 7
+read -p "enter a number" day
+if [ $day -eq 1 ]
+then
+echo $day "=sunday"
+
+elif [ $day -eq 2 ]
+then
+echo $day "=monday"
+
+elif [ $day -eq 3 ]
+then
+echo $day "=tuesday"
+
+elif [ $day -eq 4 ]
+then
+echo $day "=wednesday"
+
+elif [ $day -eq 5 ]
+then
+echo $day "=thursday"
+
+elif [ $day -eq 6 ]
+then
+echo $day "=friday"
+
+elif [ $day -eq 7 ]
+then
+echo $day "=saturday"
+
+elif [ $day -gt 7 -o $day -lt 1 ]
+then
+echo "(invalid number)"
+fi
+
+output:--
+   
+write digit between 1 to 7
+enter a number5
+5 =thursday
+
+write digit between 1 to 7
+enter a number9
+(invalid number)
+
+
+11)Read a Number 1, 10, 100, 1000, etc and display unit, ten, hundred,...
+
+sol:-
+#! /bin/bash
+read -p "Enter a number" number
+if [ number -eq 1 ]
+then 
+echo "unit"
+elif [ number -eq 10 ]
+then 
+echo "ten"
+elif [ number -eq 100 ]
+then 
+echo "hundred"
+elif [ number -eq 1000 ]
+then
+echo "one thousand"
+else
+echo "invalid number"
+fi
+output:-
+  Enter a number100
+  hundred
+ 
+  Enter a number5
+  invalid number
+
+
+12)Enter 3 Numbers do following arithmetic operation and find the one that
+
+is maximum and minimum
+1. a + b * c 3. c + a / b
+2. a % b + c 4. a * b + c
+
+sol:--
+
+#! /bin/bash
+read -p "enter a number a=" a
+read -p "enter a number b=" b
+read -p "enter a number c=" c
+
+opt1=$(( a+b*c ))
+opt2=$(( a%b+c ))
+opt3=$(( c+a/b ))
+opt4=$(( a*b+c ))
+
+echo "operations are"
+echo "first operation is =" $opt1
+echo "second operationis ="$opt2
+echo "third operationis ="$opt3
+echo "fourth operation is ="$opt4
+
+if [ $opt1 -gt $opt2 -a $opt1 -gt $opt3 -a $opt1 -gt $opt4 ]
+then
+echo "maximum number is="$opt1
+elif [ $opt2 -gt $opt3 -a $opt2 -gt $opt4 ]
+then
+echo "maximum number is="$opt2
+
+elif [ $opt3 -gt $opt4 ]
+then
+echo $opt3 "maximum number is="$opt3
+else
+echo   "maximum number is="$opt4
+fi
+
+if [ $opt1 -lt $opt2 -a $opt1 -lt $opt3 -a $opt1 -lt $opt4 ]
+then
+echo " minimum number is="$opt1
+elif [ $opt2 -lt $opt3 -a $opt2 -lt $opt4 ]
+then
+echo " minimum number is="$opt2
+
+elif [ $opt3 -lt $opt4 ]
+then
+echo  " minimum number is="$opt3
+else
+echo   " minimum number is="$opt4
+fi
+
+output:-
+  enter a number a=4
+enter a number b=5
+enter a number c=8
+operations are
+first operation is  =44
+second operation is =12
+third operation is  =8
+fourth operation is =28
+maximum number is=44
+ minimum number is=8
+
+..............................................................................
+
+Selection Practice Problems with case statement
+
+13)Write a program that takes User Inputs and does Unit Conversion of
+different Length units
+1. Feet to Inch 3. Inch to Feet
+2. Feet to Meter 4. Meter to Feet
+
+#! /bin/bash
+read -p "Enter value " val
+feettoinch=$(( $val*12 ))
+inchtofeet=$(( $val/12 ))
+feettometer=$(( $val/3 ))
+metertofeet=$(( $val*3 ))
+echo "feet to inch=" $feettoinch
+echo "inch to feet=" $inchtofeet
+echo "feet to meter=" $feettometer
+echo "meeter to feet=" $metertofeet
+
+
+output:--
+Enter value 15
+feet to inch= 180
+inch to feet= 1
+feet to meter= 5
+meeter to feet= 45
+
+
+14)Read a single digit number and write the number in word using Case
+
+sol:--
+  
+#! /bin/bash
+read -p "enter a number" digit
+case $digit in
+        1)
+        echo "one"
+        ;;
+        2)
+        echo "two"
+        ;;
+        3)
+        echo  "three"
+        ;;
+        4)
+        echo "four"
+        ;;
+        5)
+        echo "five"
+        ;;
+        6)
+        echo "six"
+        ;;
+        7)
+        echo "seven"
+        ;;
+        8)
+        echo "eight"
+        ;;
+        9)
+        echo "nine"
+        ;;
+        *)
+        echo "invalid number"
+        ;;
+esac
+
+
+output:--
+
+   enter a number9
+   nine
+
+ enter a number10
+ invalid number
+
+15)Read a Number and Display the week day (Sunday, Monday,...)
+
+sol:--
+
+#! /bin/bash
+echo "enter a number between 1 to 7"
+read -p "enter a number" digit
+case $digit in
+        1)
+        echo "sunday "
+        ;;
+        2)
+        echo "monday "
+        ;;
+        3)
+        echo "tuesday "
+        ;;
+        4)
+        echo "wednesday"
+        ;;
+        5)
+        echo "thursday"
+        ;;
+        6)
+        echo "friday"
+        ;;
+        7)
+        echo "saturday"
+        ;;
+        *)
+        echo "invalid number "
+        ;;
+esac
+
+output:--
+enter a number4
+wednesday
+
+enter a number9
+invalid number
+
+16)Read a Number 1, 10, 100, 1000, etc and display unit, ten, hundred,...
+
+sol:--
+
+#! /bin/bash
+read -p "Enter a number" number
+case $number in
+        1)
+        echo $number"=unit"
+        ;;
+        10)
+        echo $number"=ten"
+        ;;
+        100)
+        echo $number"=hundred"
+        ;;
+        1000)
+        echo $number"=one thousand"
+        ;;
+	*)
+	echo "invalid number"
+	;;
+esac
+
+output:-
+Enter a number1000s
+1000=one thousand
+
+Enter a number4
+invalid number

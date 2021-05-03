@@ -1,0 +1,317 @@
+name :--shaikh md faizan md zainulhaque
+mb no:-7775962642
+email:-faizyshaikh204@gmail.com
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+Q1) print last 4 frequently access URLs count in sorted order from /var/log/httpd/access.log
+
+sol:--
+   
+cat access.log | awk '{print $7}' | sort | uniq -c | sort -nr | head -4
+
+output:--
+     199 /vendor.js
+    199 /scripts.js
+    199 /runtime.js
+    199 /favicon.ico
+
+..........................................................................................
+
+Q2)print last 4 frequently access unique URLs at particular hours from /var/log/httpd/access.log
+
+sol:-- 
+
+ cat access.log | awk -F: '{if($2==06 || $2==07)print $0}' | sort | uniq -c | sort -nr | head -4
+  
+output:--
+      1 10.56.9.3 - - [25/Oct/2019:06:32:30 +0000] "GET /robots.txt HTTP/1.1" 200 554 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "66.249.79.42"
+      1 10.56.9.3 - - [24/Sep/2019:06:03:01 +0000] "GET / HTTP/1.1" 200 554 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon" "45.113.248.190"
+      1 10.56.9.3 - - [22/Oct/2019:06:08:04 +0000] "GET /ads.txt HTTP/1.1" 200 554 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "66.249.65.187"
+      1 10.56.9.3 - - [20/Sep/2019:06:34:47 +0000] "GET /assets/icons8-delete%20(1).svg HTTP/1.1" 200 706 "https://fundoopush-dev.bridgelabz.com/dashboard/article" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36" "114.79.180.62"
+
+
+
+.........................................................................................
+
+Q3)Print list of web response code count in the unique sorted order at specific horse
+
+slo:--
+    cat access.log | awk '{print $9}' |sort |uniq -c |sort -nr |head-4
+
+ output :--
+    3176 200
+     26 304
+      8 206
+...........................................................................................
+
+Q4)Print list of last 10 unique sorted client IP from var/log/httpd/access.log
+
+sol:--
+cat access.log | awk '{print $1}' | sort | uniq -c | sort -nr | head -4
+
+output:--
+    383 10.56.2.2
+    345 10.56.19.3
+    323 10.56.21.2
+    285 10.56.6.4
+............................................................................................
+
+** data analysis/manupulation(awk)
+Q5)
+
+1)print employee name and totalpay who has base pay greater than 10000
+sol:--
+ cat data.csv |awk '{if($4>10000) print $2,$7}'
+
+output:-
+     EmployeeName TotalPay
+NATHANIEL 567595
+GARY 538909
+ALBERT 335279
+CHRISTOPHER 332343
+PATRICK 326373
+DAVID 316285
+ALSON 315981
+DAVID 307899
+JOANNE 302377
+PATRICIA 297608
+EDWARD 294580
+
+
+a)read data file data.csv from command line and extract rows which have base pay > 10000
+
+sol:- 
+cat data.csv | awk '{if($4>10000) print $0}'
+
+output:-
+
+Id EmployeeName JobTitle        BasePay OvertimePay OtherPay TotalPay TotalPayBenefits
+1  NATHANIEL    GM              167411  0           400184   567595   567595
+2  GARY         CAPTAIN         155966  245131      137811   538909   538909
+3  ALBERT       CAPTAIN         212739  106088      16452    335279   335279
+4  CHRISTOPHER  MECHANIC        77916   56120       198306   332343   332343
+5  PATRICK      DEPUTYCHIEF     134401  9737        182234   326373   326373
+6  DAVID        ASSTDEPUTY      118602  8601        189082   316285   316285
+7  ALSON        BATTALIONCHIEF  92492   89062       134426   315981   315981
+8  DAVID        DEPUTYDIRECTOR  256576  0           51322    307899   307899
+10 JOANNE       CHIEF           285262  0           17115    302377   302377
+12 PATRICIA     CAPTAIN         99722   87082       110804   297608   297608
+13 EDWARD       EXECUTIVE       294580  0           0        294580   294580
+
+
+
+b)print only employee name and total pay
+sol:--
+ cat data.csv | awk '{print $2,$7}'
+output:--
+   
+EmployeeName TotalPay
+NATHANIEL 567595
+GARY 538909
+ALBERT 335279
+CHRISTOPHER 332343
+PATRICK 326373
+DAVID 316285
+ALSON 315981
+DAVID 307899
+JOANNE 302377
+PATRICIA 297608
+EDWARD 294580
+..........................................................................................
+
+2)What is the aggregate TotalPay of employees whose jobtitle is 'CAPTAIN'
+ sol:-
+  cat data.csv | awk '{if($3=="CAPTAIN")  sum+=$7} END {print  "aggregate is=" (sum/NR-1)}'
+ output:--
+  aggregate is=97648.7
+
+
+a)read data file data.csv from command line and extract rows which have 'captain' in the 
+column job title
+
+soln:-
+ cat data.csv | awk '{if($3=="CAPTAIN") print$0}'
+ 
+output:--
+
+2  GARY         CAPTAIN         155966  245131      137811   538909   538909
+3  ALBERT       CAPTAIN         212739  106088      16452    335279   335279
+12 PATRICIA     CAPTAIN         99722   87082       110804   297608   297608
+   
+
+b)extract total pay and calculate sum print the result on terminal
+sol:--
+
+ cat data.csv | awk '{sum+=$7} END {print sum}'
+output:--
+    3935229
+   
+....................................................................................
+3)Print JobTitIe and Overtimepay who has Overtimepay is between 7000 and 10000
+
+sol:-
+  cat data.csv | awk '{if($5>7000 && $5<10000) print $3,$5}'
+output:--
+    DEPUTYCHIEF 9737
+    ASSTDEPUTY 8601
+
+a)Read data file 'data.csv' from command line and extract jobtitle and overtimepay for
+ column value range  between 7000-10000
+
+sol:-
+ cat data.csv | awk '{if($5>7000 && $5<10000) print $0}'
+
+output:--
+5  PATRICK      DEPUTYCHIEF     134401  9737        182234   326373   326373
+6  DAVID        ASSTDEPUTY      118602  8601        189082   316285   316285
+
+.............................................................................................
+
+4)print average base pay
+a)Read data file 'data.csv' from command line and extract base pay value and calculate its
+ average
+sol:--
+cat data.csv | awk '{sum+=$4} END {print "average=" sum/NR}'
+
+output:--
+ average=157972
+.........................................................................................
+
+Q6:--Move File from one folder to the respective folders
+sol:--
+a)
+touch abc.txt def.txt ghi.txt jkl.txt
+b)
+ ls *.txt
+
+#! /bin/bash
+ for filename in `ls *.txt`
+ do
+	foldername=`echo $filename | awk -F. '{print $1}'`
+	if [ -d $foldername ]
+	then
+	rm -r $foldername
+	fi  
+	mkdir $foldername
+	cp $filename $foldername
+	echo $foldername "/" $filename
+done
+
+output:--
+abc / abc.txt
+def / def.txt
+ghi / ghi.txt
+jkl / jkl.txt
+
+.........................................................................................
+
+Q7:--Append Current date to all log file name which has extension .log. 1 from a folder
+
+sol:-- 
+  a) touch abc.log.1 def.log.1 ghi.log.1 jkl.log.1 mno.log.1 
+  b)ls '*.log.1'
+
+#! /bin/bash
+for filename in `ls *.log.1`
+do
+	foldername=`echo $filename | awk -F. '{print $1}'`		
+	rol=`echo $filename | awk -F. '{print $2}'`
+	today=`date  +%d-%m-%Y | awk -F- '{print $1$2$3}'`
+	echo $foldername-$today-$rol
+done
+
+abc-23042021-log
+def-23042021-log
+ghi-23042021-log
+jkl-23042021-log
+mno-23042021-log
+..............................................................................................
+
+Q8)Archive the File from var folder which have modified 7 days ago and move it to your backup
+ folder
+
+#! /bin/bash
+mkdir backupfolder
+for file in `ls | find.-mtime -5`
+do   
+         mv $file backupfolder
+         echo "file save into backup"
+done
+
+output:-- mkdir: cannot create directory ‘backupfolder’: File exists
+mv: cannot move '.' to a subdirectory of itself, 'backupfolder/.'
+file save into backup
+file save into backup
+file save into backup
+file save into backup
+file save into backup
+file save into backup
+mv: cannot stat './copyfolder/a': No such file or directory
+file save into backup
+mv: cannot stat './copyfolder/a/a.txt': No such file or directory
+file save into backup
+............................................................................................
+Q9):-- check if a folder exist or not.if it not present creat it
+sol:--
+
+#! /bin/bash
+if [ -d exfolder ]
+then
+echo folder already exist
+else
+echo folder not exist
+mkdir exfolder
+echo "folder created"
+fi
+
+output:--
+1)
+folder not exist
+folder created
+ 
+2)
+folder already exist
+
+.........................................................................................
+Q10) Execute command "hello" and "ls" and check its execution status and print whether command
+   execute successful or not
+
+#!/bin/bash
+echo 'hello' $?
+if [ $? -eq 0 ]
+then
+echo "Command executed successful"
+else
+echo "command not executed"
+fi
+echo 'ls' $?
+if [ $? -eq 0 ]
+then
+ echo "Command executed successful"
+else
+ echo "Command not executed "
+fi
+
+output:--
+	hello 0
+	Command executed successful
+	ls 0
+	Command executed successful
+.......................................................................................
+
+Q11)Create process list table displays process ID, parent process ID ,command name % of memory
+ consumption % of CPU utilisation
+
+sol:--
+    ps -elf | awk '{print $2,$3,$6}'
+
+PID PPID COMMAND
+685 1 20
+6298 4495 /usr/bin/ps
+4494 1 /usr/bin/mintty
+4495 4494 /usr/bin/bash
+6299 4495 /usr/bin/bash
+818 1 20
+
